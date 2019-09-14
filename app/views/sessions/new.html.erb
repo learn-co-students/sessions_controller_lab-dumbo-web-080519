@@ -1,5 +1,9 @@
-<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-  <input name=name>
-  <input type=submit value='login'>
+<% if session[:name] %>
+  hi, <%= User.find_by(name: session[:name]).name %>
+  <%= button_to "Logout", logout_path %>
+<% else %>
+  <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
+    <input name=name>
+    <input type=submit value='login'>
+  <% end %>
 <% end %>
-
